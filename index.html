@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Suzuuu's Birthday Universe 🎀</title>
+<style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:#100914;color:#fff;font-family:Georgia,serif;overflow-x:hidden}
+.page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:30px 18px;position:relative;overflow:hidden}
+.page:nth-child(1){background:radial-gradient(circle at 50% 0,#8b3d68,#321735 48%,#100914)}
+.page:nth-child(2){background:radial-gradient(circle at 20% 20%,#46306b,#17102c 55%,#080610)}
+.page:nth-child(3){background:radial-gradient(circle at 80% 20%,#6b385b,#27152f 55%,#0e0914)}
+.page:nth-child(4){background:radial-gradient(circle at 50% 0,#374f6e,#171d34 55%,#080a12)}
+.page:nth-child(5){background:radial-gradient(circle at 50% 30%,#7a4564,#29152d 55%,#0b0710)}
+.wrap{max-width:900px;width:100%;text-align:center;position:relative;z-index:2}
+.badge{display:inline-block;padding:8px 15px;border:1px solid #fff4;border-radius:99px;background:#fff1;font:600 12px Arial;letter-spacing:1px}
+h1{font-size:clamp(48px,13vw,95px);line-height:.9;margin:20px 0;text-shadow:0 0 30px #ff9bd6}
+h2{font-size:clamp(30px,7vw,55px);margin:12px 0}
+p{font:18px/1.75 Arial,sans-serif;color:#ffeaf7}
+.card{padding:28px;border:1px solid #fff2;border-radius:30px;background:#fff1;backdrop-filter:blur(12px);box-shadow:0 20px 70px #0008;margin:20px 0}
+button{border:0;border-radius:999px;padding:14px 22px;margin:7px;background:#ffd1eb;color:#35102d;font-weight:800;cursor:pointer;box-shadow:0 8px 25px #ff8bd055;transition:.2s}
+button:hover{transform:translateY(-3px) scale(1.04)}
+.nav{position:fixed;bottom:15px;left:50%;transform:translateX(-50%);z-index:20;background:#140d1dcc;border:1px solid #fff3;border-radius:999px;padding:7px;backdrop-filter:blur(10px);white-space:nowrap}
+.nav button{font-size:12px;padding:9px 12px;margin:2px}
+.doors{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:650px;margin:30px auto}
+.door{height:230px;border-radius:22px;border:2px solid #ffffff28;background:linear-gradient(90deg,#28152e,#5b2b55);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:inset 0 0 30px #0008,0 15px 40px #0005;transition:.3s;position:relative}
+.door:hover{transform:translateY(-8px) rotate(-1deg)}
+.door:before{content:"";width:78%;height:88%;border:2px solid #ffd1eb55;border-radius:14px;position:absolute}
+.knob{width:14px;height:14px;border-radius:50%;background:#ffd1a8;position:absolute;right:18%;top:52%;box-shadow:0 0 10px #ffd1a8}
+.doodle{position:absolute;font-size:40px;animation:float 4s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-15px) rotate(5deg)}}
+.secret{display:none;margin:20px auto;padding:20px;border-radius:22px;background:#fff1;border:1px solid #fff2;max-width:600px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:13px}
+.tile{padding:22px;border-radius:22px;background:#ffffff0d;border:1px solid #fff2}
+#doodleCanvas{width:100%;height:330px;background:#fffafc;border-radius:25px;touch-action:none;cursor:crosshair}
+.small{font-size:13px;color:#ffffff99}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:50}
+@media(max-width:600px){.doors{grid-template-columns:1fr;max-width:270px}.door{height:180px}.nav{width:95%;overflow:auto}}
+</style>
+</head>
+<body>
+<canvas id="confetti"></canvas>
+
+<section class="page" id="home">
+  <div class="doodle" style="left:8%;top:15%">🎀</div><div class="doodle" style="right:8%;top:25%">⭐</div>
+  <div class="wrap">
+    <span class="badge">WELCOME TO SUZUUU'S SECRET BIRTHDAY UNIVERSE</span>
+    <h1>Happy Birthday<br>Suzuuu! 💗</h1>
+    <p>Made specially by Nav ✨</p>
+    <div class="card">
+      <p>One birthday. Five places. A suspicious number of buttons. 😭</p>
+      <button onclick="go('doors')">🚪 Enter the birthday world</button>
+      <button onclick="party()">🎉 Cause chaos</button>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="doors">
+  <div class="wrap">
+    <span class="badge">CHOOSE A DOOR</span>
+    <h2>Which one are you opening? 👀</h2>
+    <p>There are no wrong answers… probably.</p>
+    <div class="doors">
+      <div class="door" onclick="openDoor(1)"><span>💌<br>Letter</span><i class="knob"></i></div>
+      <div class="door" onclick="openDoor(2)"><span>🎁<br>Surprise</span><i class="knob"></i></div>
+      <div class="door" onclick="openDoor(3)"><span>🌙<br>Secret</span><i class="knob"></i></div>
+    </div>
+    <div id="doorSecret" class="secret"></div>
+    <button onclick="go('note')">💗 Read the note</button>
+  </div>
+</section>
+
+<section class="page" id="note">
+  <div class="wrap">
+    <span class="badge">A NOTE FROM NAV</span>
+    <div class="card">
+      <h2>Hey Suzuuu 🫶</h2>
+      <p>Happy Birthdayyy! 🥳🎀 I wanted to make you something more memorable than just sending a normal birthday text.</p>
+      <p>The funniest part is that <b>I haven't even seen your face yet</b> 😭 and somehow I'm still so attached to you. We don't even talk that much, but somehow the little conversations we have stay with me.</p>
+      <p>I honestly don't know how someone can become important without even meeting properly, but somehow you did. Maybe it's your vibe, the way you talk, or simply the fact that you're unexpectedly easy to care about. 💗</p>
+      <p>I hope this birthday brings you ridiculous amounts of laughter, beautiful memories, good surprises, people who genuinely care about you and, obviously, an elite birthday cake. 🎂</p>
+      <p><b>Happy Birthday once again, Suzuuu. I'm genuinely glad I got to know you. — Nav 🫶</b></p>
+    </div>
+    <button onclick="go('doodle')">🎨 Visit the doodle room</button>
+  </div>
+</section>
+
+<section class="page" id="doodle">
+  <div class="wrap">
+    <span class="badge">THE DOODLE ROOM ✏️</span>
+    <h2>Draw something for your birthday!</h2>
+    <p>Use your finger if you're on your phone. Draw a heart, cake, star… or absolute nonsense. 😭</p>
+    <canvas id="doodleCanvas"></canvas><br>
+    <button onclick="clearCanvas()">🧹 Clear</button>
+    <button onclick="saveDoodle()">📸 Save doodle</button>
+    <button onclick="go('final')">🌟 One last room</button>
+    <p class="small">Your masterpiece deserves museum status.</p>
+  </div>
+</section>
+
+<section class="page" id="final">
+  <div class="wrap">
+    <span class="badge">FINAL ROOM UNLOCKED 🔓</span>
+    <h2>One last thing… 👀</h2>
+    <div class="grid">
+      <div class="tile">😂<br><b>More laughs</b><br>May your year be ridiculously funny.</div>
+      <div class="tile">🌷<br><b>Beautiful memories</b><br>Collect moments worth keeping.</div>
+      <div class="tile">✨<br><b>Good surprises</b><br>The kind that make your whole day.</div>
+      <div class="tile">🫶<br><b>Good people</b><br>Keep the ones who genuinely care.</div>
+    </div>
+    <div class="card">
+      <p>We may not talk every day and we've never even properly seen each other, but I'm really happy you're someone I got attached to.</p>
+      <p>Here's to more conversations, more stupid jokes, more memories and more reasons to say, “I'm glad I met you.” 💗</p>
+      <h2>Happy Birthday, Suzuuu! 🎂🎀</h2>
+      <p>— Nav</p>
+      <button onclick="party()">🎉 Birthday fireworks</button>
+      <button onclick="go('home')">🔄 Start again</button>
+    </div>
+  </div>
+</section>
+
+<div class="nav">
+<button onclick="go('home')">🏠</button><button onclick="go('doors')">🚪</button><button onclick="go('note')">💌</button><button onclick="go('doodle')">🎨</button><button onclick="go('final')">✨</button>
+</div>
+
+<script>
+function go(id){document.getElementById(id).scrollIntoView({behavior:'smooth'})}
+function openDoor(n){
+ const box=document.getElementById('doorSecret');box.style.display='block';
+ const texts=[
+  '💌 SECRET LETTER: Even without seeing each other properly, you somehow became one of those people I genuinely care about. Happy Birthday, Suzuuu! — Nav',
+  '🎁 SURPRISE: You have officially unlocked unlimited birthday smiles for the next 365 days. Side effects may include cake cravings and random happiness. 😭🎀',
+  '🌙 SECRET: If you were wondering whether this whole website was made with effort… yes. If you were wondering whether you are special… absolutely. 🫶'
+ ];
+ box.innerHTML=texts[n-1];party();
+}
+function party(){
+ const c=document.getElementById('confetti'),x=c.getContext('2d');c.width=innerWidth;c.height=innerHeight;
+ const a=Array.from({length:150},()=>({x:innerWidth/2,y:innerHeight*.35,vx:(Math.random()-.5)*14,vy:-Math.random()*11-2,g:.25,s:Math.random()*7+3,r:Math.random()*6}));
+ let t=0;(function f(){x.clearRect(0,0,c.width,c.height);a.forEach(p=>{p.x+=p.vx;p.vy+=p.g;p.y+=p.vy;p.r+=.1;x.save();x.translate(p.x,p.y);x.rotate(p.r);x.fillStyle=['#ffd1eb','#fff','#ff9ed7','#f6c7ff'][Math.floor(Math.random()*4)];x.fillRect(-p.s/2,-p.s/2,p.s,p.s*1.7);x.restore()});if(++t<120)requestAnimationFrame(f);else x.clearRect(0,0,c.width,c.height)})()
+}
+const canvas=document.getElementById('doodleCanvas'),ctx=canvas.getContext('2d');let drawing=false;
+function resize(){const r=canvas.getBoundingClientRect(),d=devicePixelRatio||1;canvas.width=r.width*d;canvas.height=r.height*d;ctx.scale(d,d);ctx.lineWidth=4;ctx.lineCap='round';ctx.strokeStyle='#9b3d78'}
+resize();addEventListener('resize',()=>location.reload());
+function pos(e){const r=canvas.getBoundingClientRect();return{x:(e.clientX??e.touches[0].clientX)-r.left,y:(e.clientY??e.touches[0].clientY)-r.top}}
+canvas.addEventListener('pointerdown',e=>{drawing=true;const p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y)});
+canvas.addEventListener('pointermove',e=>{if(!drawing)return;const p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke()});
+addEventListener('pointerup',()=>drawing=false);
+function clearCanvas(){ctx.clearRect(0,0,canvas.clientWidth,canvas.clientHeight)}
+function saveDoodle(){const a=document.createElement('a');a.download='suzuuu-doodle.png';a.href=canvas.toDataURL();a.click()}
+</script>
+</body>
+</html>
